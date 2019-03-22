@@ -2,7 +2,7 @@ import React from 'react';
 import { MuiThemeProvider, DarkTheme } from '@mic3/platform-ui';
 import { Paper, withStyles } from '@mic3/platform-ui';
 
-import TodoList from 'app/containers/TodoList';
+import Todo from 'app/containers/Todo';
 
 const styles = theme => ({
     root: {
@@ -16,7 +16,7 @@ const styles = theme => ({
 const App = ({ classes }) =>
     <MuiThemeProvider theme={DarkTheme}>
         <Paper className={classes.root}>
-            <TodoList />
+            <Todo />
         </Paper>
     </MuiThemeProvider>;
 
