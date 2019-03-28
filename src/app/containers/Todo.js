@@ -7,27 +7,28 @@ import TodoForm from 'app/presentational/TodoForm';
 import TodoList from 'app/presentational/TodoList';
 
 const styles = (theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        paddingp: theme.spacing.unit * 2,
-    }
+    root: { flexGrow: 1 },
+    paper: { paddingp: theme.spacing.unit * 2 },
 });
 
-const useTodoList = (initialValue = []) => {
+const useCtrlTodoList = (initialValue = []) => {
     const [todos, setTodos] = useState(initialValue);
 
     const addTodo = (todo) => setTodos([...todos, todo]);
-    const deleteTodo = (todoIndex) => setTodos(
-        todos.filter((_, index) => index !== todoIndex)
-    );
+
+    const deleteTodo = (todoIndex) => {
+        console.log('$$$ delete');
+        setTodos(
+            todos.filter((_, index) => index !== todoIndex)
+        )
+    };
 
     return [todos, addTodo, deleteTodo];
 };
 
 const Todo = ({ classes }) => {
-    const [todos, addTodo, deleteTodo] = useTodoList();
+    const [todos, addTodo, deleteTodo] = useCtrlTodoList();
+    console.log('$$$ [todos]', todos);
     return (
         <Grid
             container

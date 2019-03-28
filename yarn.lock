@@ -974,10 +974,10 @@
     prop-types "^15.6.0"
     react-is "^16.6.3"
 
-"@mic3/platform-ui@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@mic3/platform-ui/-/platform-ui-0.2.0.tgz#d06db8ac9a7e63f54acfd7e5ebb8b9f430a4b163"
-  integrity sha512-tVXOjFjqAvEuOxhrzjgLkXA0urla5reNlV/juTmkEn6O4qDlxB6H6lOI/RaNMGWq7yOTUngIZ24wWJ02BixBLw==
+"@mic3/platform-ui@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@mic3/platform-ui/-/platform-ui-0.3.0.tgz#169f9a015be5a99f6a786dc93bc781d6ece8c7ae"
+  integrity sha512-Ik8J3S3ZJC1kmQJmZEO+bQNtr9C4IxonFFTCZCg8+4izx2nkcqQZmx+wtQmgkh493xBYQJgILWhzsyOwGIlUKg==
   dependencies:
     "@date-io/moment" "^1.1.0"
     "@material-ui/core" "^3.9.2"

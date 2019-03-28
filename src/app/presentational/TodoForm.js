@@ -12,12 +12,10 @@ const TodoForm = ({ classes, onSubmit }) => {
         event.preventDefault();
         onSubmit(todo);
         setTodo('');
-    }, [onChange]);
+    }, [todo]);
 
     return (
-        <form
-            onSubmit={onSubmitForm}
-        >
+        <form onSubmit={onSubmitForm} >
             <TextField
                 variant="outlined"
                 placeholder="Add todo"
@@ -31,7 +29,7 @@ const TodoForm = ({ classes, onSubmit }) => {
 };
 
 TodoForm.propTypes = {
-    onSumbmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
 };
 
 export default memo(TodoForm);
