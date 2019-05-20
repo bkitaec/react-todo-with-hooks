@@ -2,17 +2,12 @@
   "name": "react-todo-with-hooks",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@mic3/platform-ui": "^0.2.0",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "yarn eslint --fix ./src"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -23,8 +18,19 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "dependencies": {
+    "@mic3/platform-ui": "^0.4.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-scripts": "2.1.8"
+  },
   "devDependencies": {
-    "eslint-plugin-jsx-a11y": "^6.2.1"
+    "eslint": "^5.16.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.13.0",
+    "eslint-plugin-react-hooks": "^1.6.0"
   },
   "babel": {
     "presets": [
