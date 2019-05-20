@@ -1,40 +1,56 @@
 
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
 
-import { Typography, Grid, Paper, withStyles } from '@mic3/platform-ui';
+import {
+    Typography, Grid, Paper, withStyles,
+} from '@mic3/platform-ui';
 
 import TodoForm from 'app/presentational/TodoForm';
 import TodoList from 'app/presentational/TodoList';
 
-const styles = (theme) => ({
-    root: { flexGrow: 1 },
+const styles = theme => ({
+    root: { flexGrow: 1, maxWidth: '400px', margin: 'auto' },
     paper: { paddingp: theme.spacing.unit * 2 },
 });
 
 const useCtrlTodoList = (initialValue = []) => {
     const [todos, setTodos] = useState(initialValue);
+    const [todosDone, setTodosDone] = useState([]);
 
-    const addTodo = (todo) => setTodos([...todos, todo]);
+    const addTodo = todo => setTodos([...todos, todo]);
 
-    const deleteTodo = (todoIndex) => {
-        console.log('$$$ delete');
+    const deleteTodo = useCallback((todoIndex) => {
         setTodos(
-            todos.filter((_, index) => index !== todoIndex)
-        )
-    };
+            todos.filter((_, index) => index !== todoIndex),
+        );
+    }, [todos, setTodos]);
+    const deleteTodoDone = useCallback((todoIndex) => {
+        setTodosDone(
+            todosDone.filter((_, index) => index !== todoIndex),
+        );
+    }, [todosDone, setTodosDone]);
 
-    return [todos, addTodo, deleteTodo];
+    const doneTodo = useCallback((todoIndex) => {
+        setTodosDone([...todosDone, todos[todoIndex]]);
+        setTodos(
+            todos.filter((_, index) => index !== todoIndex),
+        );
+    }, [setTodosDone, setTodos, todos, todosDone]);
+
+    return [todos, todosDone, addTodo, deleteTodo, doneTodo, deleteTodoDone];
 };
 
+const initialList = ['Morning exercise', 'Evening latin party', 'Pranayama', 'Read a book'];
+
 const Todo = ({ classes }) => {
-    const [todos, addTodo, deleteTodo] = useCtrlTodoList();
-    console.log('$$$ [todos]', todos);
+    const [todos, todosDone, addTodo, deleteTodo, doneTodo, deleteTodoDone] = useCtrlTodoList(initialList);
     return (
         <Grid
             container
             direction="column"
             justify="center"
-            alignItems="center"
+            alignItems="stretch"
             spacing={24}
             className={classes.root}
         >
@@ -45,12 +61,15 @@ const Todo = ({ classes }) => {
                 </Paper>
             </Grid>
             <Grid item>
-                <Paper>
-                    <TodoList todos={todos} deleteTodo={deleteTodo} />
-                </Paper>
+                <TodoList doneTodo={doneTodo} todos={todos} deleteTodo={deleteTodo} />
+                <TodoList todos={todosDone} deleteTodo={deleteTodoDone} />
             </Grid>
         </Grid>
     );
+};
+
+Todo.propTypes = {
+    classes: PropTypes.object.isRequired,
 };
 
 export default memo(withStyles(styles)(Todo));

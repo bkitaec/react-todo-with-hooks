@@ -1,27 +1,28 @@
 
 import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { TextField } from '@mic3/platform-ui';
+import { Input } from '@mic3/platform-ui';
 
 import useOnChange from 'app/hooks/useOnChange';
 
-const TodoForm = ({ classes, onSubmit }) => {
+const TodoForm = ({ onSubmit }) => {
     const [todo, onChange, setTodo] = useOnChange('');
 
     const onSubmitForm = useCallback((event) => {
         event.preventDefault();
         onSubmit(todo);
         setTodo('');
-    }, [todo]);
+    }, [onSubmit, setTodo, todo]);
 
     return (
-        <form onSubmit={onSubmitForm} >
-            <TextField
-                variant="outlined"
+        <form onSubmit={onSubmitForm}>
+            <Input
                 placeholder="Add todo"
                 margin="normal"
                 onChange={onChange}
                 value={todo}
+                fullWidth
+                autoFocus
             />
         </form>
 

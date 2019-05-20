@@ -1,18 +1,35 @@
 
 import React, { useCallback, useMemo, memo } from 'react';
+import PropTypes from 'prop-types';
 
-import { List, ListItem, ListItemSecondaryAction, ListItemText, Checkbox, IconButton, MdiIcon } from '@mic3/platform-ui';
+import {
+    List, ListItem, ListItemSecondaryAction, ListItemText, Checkbox, IconButton, MdiIcon, withStyles,
+} from '@mic3/platform-ui';
 
+const styles = {
+    list: {
+        wordBreak: 'break-all',
+    },
+    through: {
+        textDecoration: 'line-through',
+    },
+};
 
-const TodoList = ({ todos, deleteTodo }) => {
+const TodoList = ({
+    todos, deleteTodo, classes, doneTodo,
+}) => {
     const onDelete = useCallback((index) => {
         deleteTodo(index);
     }, [deleteTodo]);
 
+    const onDone = useCallback((index) => {
+        doneTodo(index);
+    }, [doneTodo]);
+
     const todosList = useMemo(() => todos.map((todo, index) => (
         <ListItem key={index.toString()} dense button>
-            <Checkbox tabIndex={-1} />
-            <ListItemText primary={todo} />
+            {doneTodo && <Checkbox tabIndex={-1} onClick={() => onDone(index)} />}
+            <ListItemText className={`${classes.list} ${!doneTodo ? classes.through : ''}`} primary={todo} />
             <ListItemSecondaryAction>
                 <IconButton
                     aria-label="Delete"
@@ -22,7 +39,7 @@ const TodoList = ({ todos, deleteTodo }) => {
                 </IconButton>
             </ListItemSecondaryAction>
         </ListItem>
-    )), [todos]);
+    )), [classes.list, classes.through, doneTodo, onDelete, onDone, todos]);
 
     return (
         <List>
@@ -31,4 +48,11 @@ const TodoList = ({ todos, deleteTodo }) => {
     );
 };
 
-export default memo(TodoList);
+TodoList.propTypes = {
+    todos: PropTypes.array.isRequired,
+    deleteTodo: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired,
+    doneTodo: PropTypes.func,
+};
+
+export default memo(withStyles(styles)(TodoList));

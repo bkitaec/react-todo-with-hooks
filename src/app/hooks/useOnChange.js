@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 const useOnChange = (value: any, refresh: ?boolean = true) => {
     const [val, setValue] = useState(value);
-    refresh && useEffect(() => {
+    refresh && useEffect(() => { // eslint-disable-line
         setValue(value);
     }, [value]);
     const onChange = useCallback((e: Object) => {
