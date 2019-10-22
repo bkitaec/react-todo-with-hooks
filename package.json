@@ -19,11 +19,11 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@mic3/platform-ui": "^0.4.0",
+    "@mic3/platform-ui": "^0.7.3",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "react-scripts": "^3.2.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
